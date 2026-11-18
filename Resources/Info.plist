@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>Notch</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(BUNDLE_ID)</string>
+	<key>CFBundleName</key>
+	<string>Notch</string>
+	<key>CFBundleDisplayName</key>
+	<string>Notch</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(BUILD_NUMBER)</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.2</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSAudioCaptureUsageDescription</key>
+	<string>Notch listens to system audio only to draw the live soundwave next to the notch. Nothing is recorded or stored.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Notch shows a short banner with the battery level when a Bluetooth accessory such as AirPods connects.</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Notch reads the current track and sends play/pause/next/previous to Spotify and Music when system Now Playing is unavailable.</string>
+	<key>SUFeedURL</key>
+	<string>$(FEED_URL)</string>
+	<key>SUPublicEDKey</key>
+	<string>$(SPARKLE_PUBLIC_KEY)</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUScheduledCheckInterval</key>
+	<integer>21600</integer>
+	<key>SUEnableInstallerLauncherService</key>
+	<false/>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>Fallback for capturing system audio for the soundwave. No screen content is used.</string>
+</dict>
+</plist>

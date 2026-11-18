@@ -1,0 +1,8 @@
+.build/
+build/
+.DS_Store
+*.xcuserstate
+.swiftpm/
+.claude/
+# The license check of the ready-made builds lives outside this repository.
+Private/

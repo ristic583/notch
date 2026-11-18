@@ -1,0 +1,44 @@
+# Builds Notch and runs its tests on every push and pull request that touches
+# the app. Signing and releasing happen elsewhere, with the keys.
+name: App
+
+on:
+  push:
+    paths: [Sources/**, Tests/**, Bridge/**, Package.swift, Package.resolved, .github/workflows/app.yml]
+  pull_request:
+    paths: [Sources/**, Tests/**, Bridge/**, Package.swift, Package.resolved, .github/workflows/app.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: app-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: maxim-lobanov/setup-xcode@ed7a3b1fda3918c0306d1b724322adc0b8cc0a90 # v1.7.0
+        with:
+          xcode-version: latest-stable
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .build
+          key: spm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-${{ runner.os }}-
+      - name: Build
+        run: swift build --build-tests
+      - name: Test
+        run: swift test --skip-build
+      - name: Build the bridge and the Claude Code hook
+        run: |
+          xcrun clang -dynamiclib -fobjc-arc -O2 -Wall -framework Foundation -framework AppKit \
+            Bridge/MediaRemoteBridge.m -o "$RUNNER_TEMP/MediaRemoteBridge.dylib"
+          xcrun clang -fobjc-arc -O2 -Wall -framework Foundation \
+            Bridge/notch-agent-hook.m -o "$RUNNER_TEMP/notch-agent-hook"

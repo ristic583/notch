@@ -1,0 +1,53 @@
+<!-- Notch app icon. Source of Resources/AppIcon.png and .icns: scripts/make-icon.sh.
+     Apple's grid: an 824 body on a 1024 canvas, corner radius 185. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="squircle"><rect x="100" y="100" width="824" height="824" rx="185"/></clipPath>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3b41"/>
+      <stop offset="0.55" stop-color="#26272c"/>
+      <stop offset="1" stop-color="#1b1b1f"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.25" cy="0.15" r="0.9">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="notchFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d0d0e"/>
+      <stop offset="1" stop-color="#030303"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="wash" x="-80%" y="-80%" width="260%" height="360%"><feGaussianBlur stdDeviation="88"/></filter>
+    <filter id="mid" x="-60%" y="-60%" width="220%" height="280%"><feGaussianBlur stdDeviation="42"/></filter>
+    <filter id="tight" x="-40%" y="-40%" width="180%" height="200%"><feGaussianBlur stdDeviation="20"/></filter>
+    <filter id="barGlow" x="-120%" y="-60%" width="340%" height="220%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <path id="notch" d="M226 122C244 122 252 131 252 150V262C252 312 282 338 332 338H692C742 338 772 312 772 262V150C772 131 780 122 798 122Z"/>
+  </defs>
+  <g clip-path="url(#squircle)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#body)"/>
+    <rect x="100" y="100" width="824" height="824" fill="url(#sheen)"/>
+    <!-- Warm light leaking out around the notch: a wide wash, a middle layer, a tight rim. -->
+    <use href="#notch" fill="#f08a60" stroke="#f08a60" stroke-width="90" filter="url(#wash)"/>
+    <use href="#notch" fill="none" stroke="#f5905f" stroke-width="56" opacity="0.75" filter="url(#mid)"/>
+    <use href="#notch" fill="none" stroke="#f99468" stroke-width="44" filter="url(#tight)"/>
+    <!-- The screen's top edge the notch hangs from, then the notch itself. -->
+    <rect x="100" y="100" width="824" height="22" fill="#111113"/>
+    <use href="#notch" fill="url(#notchFill)"/>
+    <path d="M252 150V262C252 312 282 338 332 338H692C742 338 772 312 772 262V150" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="3"/>
+    <!-- Five sound bars. -->
+    <g fill="#ff9166" filter="url(#barGlow)">
+      <rect x="401" y="235" width="30" height="60" rx="15"/>
+      <rect x="449" y="194" width="30" height="101" rx="15"/>
+      <rect x="497" y="165" width="30" height="130" rx="15"/>
+      <rect x="545" y="210" width="30" height="85" rx="15"/>
+      <rect x="593" y="244" width="30" height="51" rx="15"/>
+    </g>
+    <rect x="100" y="100" width="824" height="60" fill="url(#rim)"/>
+  </g>
+</svg>
